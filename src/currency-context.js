@@ -1,5 +1,12 @@
 import React from 'react';
 
-const CurrencyContext = React.createContext(null);
+// const CurrencyContext = React.createContext(null);
 
-export { CurrencyContext };
+// export { CurrencyContext };
+
+
+const CurrencyContext = React.createContext({
+    time : "1111€",
+});
+
+export default CurrencyContext

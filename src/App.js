@@ -1,5 +1,5 @@
 import React from 'react';
-import { CurrencyContext } from './currency-context';
+import  CurrencyContext  from './currency-context';
 
 
 const DATA = [
@@ -25,10 +25,12 @@ const DATA = [
 //     </div>
 //   );
 // };
-
+//value="1111€"
 const App = () => {
   return (
-    <CurrencyContext.Provider value="€">
+    <CurrencyContext.Provider value={{
+      time : "1111€",
+    }}>
       <Books list={DATA} />
     </CurrencyContext.Provider>
   );
@@ -37,10 +39,10 @@ const App = () => {
 
 
 
-const Books = ({ list }) => {
+const Books = (props) => {
   return (
     <ul>
-      {list.map((item) => (
+      {props.list.map((item) => (
         <Book key={item.id} item={item} />
       ))}
     </ul>
@@ -56,13 +58,20 @@ const Books = ({ list }) => {
 // };
 
 
-const Book = ({ item }) => {
-  const currency = React.useContext(CurrencyContext);
+const Book = (props) => {
+ // const currency = React.useContext(CurrencyContext);
 
   return (
-    <li>
-      {item.title} - {item.price} {currency}
-    </li>
+    <CurrencyContext.Consumer>
+    {(ctx) =>{
+      return (
+        <li>{ctx.time}</li>
+      )
+    }}
+    {/* <li>
+      {props.item.title} - {props.item.price} {currency.time}
+    </li> */}
+    </CurrencyContext.Consumer>
   );
 };
 
